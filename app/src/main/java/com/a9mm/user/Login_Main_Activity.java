@@ -4,14 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.a9mm.user.adapters.PlateAdapter;
+import com.a9mm.user.email_signin_signup.EmailLoginActivity;
+import com.a9mm.user.email_signin_signup.EmailRegisterActivity;
 import com.a9mm.user.models.PlateModel;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +27,7 @@ public class Login_Main_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
+    LinearLayout linear_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,8 @@ public class Login_Main_Activity extends AppCompatActivity {
             Window w = this.getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+
+        linear_email = (LinearLayout) findViewById(R.id.linear_email);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -53,6 +62,15 @@ public class Login_Main_Activity extends AppCompatActivity {
 
         autoScroll();
         //this function is for auto scrolling the listview
+        linear_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Main_Activity.this, EmailLoginActivity.class);
+                startActivity(intent);
+                Animatoo.animateSlideLeft(Login_Main_Activity.this);
+                finish();
+            }
+        });
     }
 
     public void autoScroll() {
