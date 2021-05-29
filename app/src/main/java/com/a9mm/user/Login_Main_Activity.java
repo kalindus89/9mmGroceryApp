@@ -52,6 +52,7 @@ public class Login_Main_Activity extends AppCompatActivity {
         plateAdapter.notifyDataSetChanged();
 
         autoScroll();
+        //this function is for auto scrolling the listview
     }
 
     public void autoScroll() {
