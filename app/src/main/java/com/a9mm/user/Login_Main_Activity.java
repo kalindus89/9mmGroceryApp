@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.a9mm.user.adapters.PlateAdapter;
@@ -28,6 +29,7 @@ public class Login_Main_Activity extends AppCompatActivity {
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
     LinearLayout linear_email,linear_phone;
+    Button skipToMainPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class Login_Main_Activity extends AppCompatActivity {
 
         linear_email = (LinearLayout) findViewById(R.id.linear_email);
         linear_phone = (LinearLayout) findViewById(R.id.linear_phone);
+        skipToMainPage = (Button) findViewById(R.id.buttonSkip);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -79,6 +82,16 @@ public class Login_Main_Activity extends AppCompatActivity {
                 Intent intent = new Intent(Login_Main_Activity.this, PhoneLoginActivity.class);
                 startActivity(intent);
                 Animatoo.animateSlideLeft(Login_Main_Activity.this);
+                finish();
+            }
+        });
+
+        skipToMainPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Main_Activity.this, HomeMainActivity.class);
+                startActivity(intent);
+                Animatoo.animateWindmill(Login_Main_Activity.this);
                 finish();
             }
         });
