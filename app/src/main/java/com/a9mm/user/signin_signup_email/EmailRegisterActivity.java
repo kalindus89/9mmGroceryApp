@@ -1,4 +1,4 @@
-package com.a9mm.user.email_signin_signup;
+package com.a9mm.user.signin_signup_email;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,15 +9,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
-public class EmailLoginActivity extends AppCompatActivity {
+public class EmailRegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.email_login_activity);
+        setContentView(R.layout.email_register_activity);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = this.getWindow();
@@ -25,10 +26,16 @@ public class EmailLoginActivity extends AppCompatActivity {
         }
     }
 
-    public void  goToRegister(View view){
-        Intent intent = new Intent(EmailLoginActivity.this, EmailRegisterActivity.class);
+    public void  goToLogin(View view){
+        Intent intent = new Intent(EmailRegisterActivity.this, EmailLoginActivity.class);
         startActivity(intent);
-        Animatoo.animateSwipeLeft(EmailLoginActivity.this);
+        Animatoo.animateSlideLeft(EmailRegisterActivity.this);
+        finish();
+    }
+    public void  backToMainLoginPage(View view){
+        Intent intent = new Intent(EmailRegisterActivity.this, Login_Main_Activity.class);
+        startActivity(intent);
+        Animatoo.animateSlideRight(EmailRegisterActivity.this);
         finish();
     }
 }

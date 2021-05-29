@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:src="@drawable/phone_icon" />
+            android:src="@drawable/mobile_icon" />
 
         <TextView
             android:layout_width="match_parent"

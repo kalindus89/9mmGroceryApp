@@ -14,9 +14,9 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.a9mm.user.adapters.PlateAdapter;
-import com.a9mm.user.email_signin_signup.EmailLoginActivity;
-import com.a9mm.user.email_signin_signup.EmailRegisterActivity;
+import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.models.PlateModel;
+import com.a9mm.user.signin_singup_phone.PhoneLoginActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class Login_Main_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
-    LinearLayout linear_email;
+    LinearLayout linear_email,linear_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class Login_Main_Activity extends AppCompatActivity {
         }
 
         linear_email = (LinearLayout) findViewById(R.id.linear_email);
+        linear_phone = (LinearLayout) findViewById(R.id.linear_phone);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -66,6 +67,16 @@ public class Login_Main_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Main_Activity.this, EmailLoginActivity.class);
+                startActivity(intent);
+                Animatoo.animateSlideLeft(Login_Main_Activity.this);
+                finish();
+            }
+        });
+
+        linear_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Main_Activity.this, PhoneLoginActivity.class);
                 startActivity(intent);
                 Animatoo.animateSlideLeft(Login_Main_Activity.this);
                 finish();
