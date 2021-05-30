@@ -28,7 +28,7 @@ public class Login_Main_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PlateModel> plateModelList;
     private PlateAdapter plateAdapter;
-    LinearLayout linear_email,linear_phone;
+    LinearLayout linear_email, linear_phone;
     Button skipToMainPage;
 
     @Override
@@ -36,10 +36,8 @@ public class Login_Main_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main_activity);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = this.getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
+       //to hide statusbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         linear_email = (LinearLayout) findViewById(R.id.linear_email);
         linear_phone = (LinearLayout) findViewById(R.id.linear_phone);
@@ -91,7 +89,7 @@ public class Login_Main_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Main_Activity.this, HomeMainActivity.class);
                 startActivity(intent);
-                Animatoo.animateWindmill(Login_Main_Activity.this);
+                Animatoo.animateShrink(Login_Main_Activity.this);
                 finish();
             }
         });
