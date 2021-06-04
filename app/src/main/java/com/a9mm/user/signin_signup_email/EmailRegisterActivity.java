@@ -17,12 +17,20 @@ import android.widget.Toast;
 import com.a9mm.user.HomeMainActivity;
 import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
+import com.a9mm.user.retrofit_api.ApiClient;
+import com.a9mm.user.retrofit_api.ApiInterface;
+import com.a9mm.user.retrofit_api.Users;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EmailRegisterActivity extends AppCompatActivity {
 
     EditText password_user,email_user,name_user;
     Button conBtn;
+    public  static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,8 @@ public class EmailRegisterActivity extends AppCompatActivity {
 
         //to hide statusbar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        apiInterface= ApiClient.getApiClient().create(ApiInterface.class);
 
         name_user = (EditText) findViewById(R.id.name_user);
         email_user = (EditText) findViewById(R.id.email_user);
@@ -61,7 +71,31 @@ public class EmailRegisterActivity extends AppCompatActivity {
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
 
-                    Toast.makeText(EmailRegisterActivity.this, "Success Register", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(EmailRegisterActivity.this, "Success Register", Toast.LENGTH_SHORT).show();
+
+                    Call<Users> call =apiInterface.performEmailRegistration(name,email,password);
+                    call.enqueue(new Callback<Users>() {
+                        @Override
+                        public void onResponse(Call<Users> call, Response<Users> response) {
+                            if(response.body().getResponse().equals("ok")){
+                                Toast.makeText(EmailRegisterActivity.this, "Success Registration", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else if(response.body().getResponse().equals("failed")){
+                                Toast.makeText(EmailRegisterActivity.this, "Failed Registration", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else if(response.body().getResponse().equals("Already")){
+                                Toast.makeText(EmailRegisterActivity.this, "Already Registered", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Users> call, Throwable t) {
+
+                        }
+                    });
                 }
 
             }
