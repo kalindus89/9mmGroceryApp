@@ -71,8 +71,6 @@ public class EmailRegisterActivity extends AppCompatActivity {
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
 
-                   // Toast.makeText(EmailRegisterActivity.this, "Success Register", Toast.LENGTH_SHORT).show();
-
                     Call<Users> call =apiInterface.performEmailRegistration(name,email,password);
                     call.enqueue(new Callback<Users>() {
                         @Override
@@ -89,11 +87,17 @@ public class EmailRegisterActivity extends AppCompatActivity {
                                 Toast.makeText(EmailRegisterActivity.this, "Already Registered", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
+                            else {
+                                Toast.makeText(EmailRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
                         }
 
                         @Override
                         public void onFailure(Call<Users> call, Throwable t) {
 
+                            Toast.makeText(EmailRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
                     });
                 }

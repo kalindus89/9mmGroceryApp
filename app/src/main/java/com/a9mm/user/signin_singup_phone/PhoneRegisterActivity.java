@@ -16,14 +16,22 @@ import android.widget.Toast;
 
 import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
+import com.a9mm.user.retrofit_api.ApiClient;
+import com.a9mm.user.retrofit_api.ApiInterface;
+import com.a9mm.user.retrofit_api.Users;
 import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.signin_signup_email.EmailRegisterActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PhoneRegisterActivity extends AppCompatActivity {
 
     EditText phoneNumber;
     Button conBtn;
+    public  static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,8 @@ public class PhoneRegisterActivity extends AppCompatActivity {
 
         //to hide statusbar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        apiInterface= ApiClient.getApiClient().create(ApiInterface.class);
 
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
         conBtn = (Button) findViewById(R.id.conBtn);
@@ -53,7 +63,37 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                     dialog.setMessage("Please wait we are checking your credentials");
                     dialog.show();
                     dialog.setCanceledOnTouchOutside(false);
-                    Toast.makeText(PhoneRegisterActivity.this, "Success Phone Register", Toast.LENGTH_SHORT).show();
+
+                    Call<Users> call =apiInterface.performPhoneRegistration(phone);
+                    call.enqueue(new Callback<Users>() {
+                        @Override
+                        public void onResponse(Call<Users> call, Response<Users> response) {
+                            if(response.body().getResponse().equals("ok")){
+                                Toast.makeText(PhoneRegisterActivity.this, "Registration Success ", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else if(response.body().getResponse().equals("failed")){
+                                Toast.makeText(PhoneRegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else if(response.body().getResponse().equals("Already")){
+                                Toast.makeText(PhoneRegisterActivity.this, "Already Registered", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else {
+                                Toast.makeText(PhoneRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Users> call, Throwable t) {
+
+                            Toast.makeText(PhoneRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+                        }
+                    });
                 }
             }
         });
