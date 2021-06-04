@@ -72,7 +72,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                             else if(response.body().getResponse().equals("No account")){
-                                Toast.makeText(PhoneLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PhoneLoginActivity.this, "No account", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                             else {

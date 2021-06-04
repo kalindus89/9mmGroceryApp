@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "401247266009",
+    "project_id": "nine-mm",
+    "storage_bucket": "nine-mm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401247266009:android:f7045f6cc4d4222bd48ac8",
+        "android_client_info": {
+          "package_name": "com.a9mm.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401247266009-3lkluinjlncthnr8annj7mpkadcq4hi7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a9mm.user",
+            "certificate_hash": "f721a3a32e79a513672d4e64a386102d7b3992a9"
+          }
+        },
+        {
+          "client_id": "401247266009-ksak2vbbir76jku91p6pbaauhud5tv5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOMvXStd8NBfybpmFH9nLIHUZEn1yVraw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401247266009-ksak2vbbir76jku91p6pbaauhud5tv5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

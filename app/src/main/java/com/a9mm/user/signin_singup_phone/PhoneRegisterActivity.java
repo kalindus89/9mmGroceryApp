@@ -69,7 +69,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Users> call, Response<Users> response) {
                             if(response.body().getResponse().equals("ok")){
-                                Toast.makeText(PhoneRegisterActivity.this, "Registration Success ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PhoneRegisterActivity.this, "Registration Success "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                             else if(response.body().getResponse().equals("failed")){

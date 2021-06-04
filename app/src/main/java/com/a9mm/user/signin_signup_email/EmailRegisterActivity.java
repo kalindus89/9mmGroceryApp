@@ -76,7 +76,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Users> call, Response<Users> response) {
                             if(response.body().getResponse().equals("ok")){
-                                Toast.makeText(EmailRegisterActivity.this, "Success Registration", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EmailRegisterActivity.this, "Success Registration "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                             else if(response.body().getResponse().equals("failed")){
