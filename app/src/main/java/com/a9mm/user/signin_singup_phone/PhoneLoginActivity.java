@@ -28,8 +28,8 @@ import retrofit2.Response;
 
 public class PhoneLoginActivity extends AppCompatActivity {
 
-    EditText phoneNumber;
-    Button conBtn;
+    EditText phoneNumber,otp;
+    Button conBtn,otpBtn;
     public  static ApiInterface apiInterface;
 
     @Override
@@ -43,7 +43,10 @@ public class PhoneLoginActivity extends AppCompatActivity {
         apiInterface= ApiClient.getApiClient().create(ApiInterface.class);
 
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
+        otp = (EditText) findViewById(R.id.otp);
         conBtn = (Button) findViewById(R.id.conBtn);
+        otpBtn = (Button) findViewById(R.id.otpBtn);
+
         buttonOnclick();
     }
 
@@ -51,47 +54,61 @@ public class PhoneLoginActivity extends AppCompatActivity {
         conBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginNow();
+            }
+        });
 
-                String phone = phoneNumber.getText().toString().trim();
+        otpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String otp_text = otp.getText().toString().trim();
 
-                if(TextUtils.isEmpty(phone)){
-                    phoneNumber.setError("phoneNumber is required");
-                }else{
-                    ProgressDialog dialog = new ProgressDialog(PhoneLoginActivity.this);
-                    dialog.setTitle("Loading...");
-                    dialog.setMessage("Please wait we are checking your credentials");
-                    dialog.show();
-                    dialog.setCanceledOnTouchOutside(false);
-
-                    Call<Users> call =apiInterface.performPhoneLogin(phone);
-                    call.enqueue(new Callback<Users>() {
-                        @Override
-                        public void onResponse(Call<Users> call, Response<Users> response) {
-                            if(response.body().getResponse().equals("ok")){
-                                Toast.makeText(PhoneLoginActivity.this, "Login Success "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                            else if(response.body().getResponse().equals("No account")){
-                                Toast.makeText(PhoneLoginActivity.this, "No account", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                            else {
-                                Toast.makeText(PhoneLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Users> call, Throwable t) {
-
-                            Toast.makeText(PhoneLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-
-                        }
-                    });
+                if (TextUtils.isEmpty(otp_text)) {
+                    otp.setError("Please enter the OTP");
                 }
             }
         });
+    }
+
+    public void loginNow(){
+        String phone = phoneNumber.getText().toString().trim();
+
+        if(TextUtils.isEmpty(phone)){
+            phoneNumber.setError("phoneNumber is required");
+        }else{
+            ProgressDialog dialog = new ProgressDialog(PhoneLoginActivity.this);
+            dialog.setTitle("Loading...");
+            dialog.setMessage("Please wait we are checking your credentials");
+            dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
+
+            Call<Users> call =apiInterface.performPhoneLogin(phone);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+                    if(response.body().getResponse().equals("ok")){
+                        Toast.makeText(PhoneLoginActivity.this, "Login Success "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                    else if(response.body().getResponse().equals("No account")){
+                        Toast.makeText(PhoneLoginActivity.this, "No account", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                    else {
+                        Toast.makeText(PhoneLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+
+                    Toast.makeText(PhoneLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+
+                }
+            });
+        }
     }
 
     public void goToRegister_phone(View view) {
