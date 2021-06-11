@@ -67,6 +67,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
         otp = (EditText) findViewById(R.id.otp);
         conBtn = (Button) findViewById(R.id.conBtn);
         otpBtn = (Button) findViewById(R.id.otpBtn);
+
         mAuth = FirebaseAuth.getInstance();
 
         dialog = new ProgressDialog(PhoneRegisterActivity.this);
@@ -114,13 +115,14 @@ public class PhoneRegisterActivity extends AppCompatActivity {
     }
 
     public void buttonOnclick() {
-        String phone = phoneNumber.getText().toString().trim();
         conBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(phoneNumber.getText().toString().trim())) {
                     phoneNumber.setError("phoneNumber is required");
+                }else if(phoneNumber.getText().toString().trim().length() <9){
+                    phoneNumber.setError("phoneNumber is not correct");
                 }
                 else {
                     dialog.show();
