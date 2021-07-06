@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.a9mm.user.Login_Main_Activity;
@@ -22,6 +23,7 @@ import com.a9mm.user.retrofit_api.Users;
 import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.signin_signup_email.EmailRegisterActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -50,7 +52,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
     private FirebaseAuth mAuth;
-    ProgressDialog dialog;
+    ImageView dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +72,8 @@ public class PhoneRegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        dialog = new ProgressDialog(PhoneRegisterActivity.this);
-        dialog.setTitle("Loading...");
-        dialog.setMessage("Please wait we are checking your credentials");
-        dialog.setCanceledOnTouchOutside(false);
+        dialog = (ImageView) findViewById(R.id.loaderImage);
+        Glide.with(this).load(R.drawable.loader).into(dialog);
 
         buttonOnclick();
 
@@ -88,7 +88,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                dialog.dismiss();
+                dialog.setVisibility(View.GONE);
                 phoneNumber.setVisibility(View.VISIBLE);
                 conBtn.setVisibility(View.VISIBLE);
                 otp.setVisibility(View.GONE);
@@ -107,7 +107,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                 conBtn.setVisibility(View.GONE);
                 otp.setVisibility(View.VISIBLE);
                 otpBtn.setVisibility(View.VISIBLE);
-                dialog.dismiss();
+                dialog.setVisibility(View.GONE);
                 Toast.makeText(PhoneRegisterActivity.this, "Code has been Sent. please Verify it.", Toast.LENGTH_SHORT).show();
 
             }
@@ -125,7 +125,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                     phoneNumber.setError("phoneNumber is not correct");
                 }
                 else {
-                    dialog.show();
+                    dialog.setVisibility(View.VISIBLE);
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             phoneNumber.getText().toString().trim(),
                             60,
@@ -144,7 +144,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(otp_text)) {
                     otp.setError("Please enter the OTP");
                 } else {
-                    dialog.show();
+                    dialog.setVisibility(View.VISIBLE);
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, otp_text);
                     signInWithPhoneAuthCredential(credential);
                 }
@@ -176,24 +176,24 @@ public class PhoneRegisterActivity extends AppCompatActivity {
             public void onResponse(Call<Users> call, Response<Users> response) {
                 if (response.body().getResponse().equals("ok")) {
                     Toast.makeText(PhoneRegisterActivity.this, "Registration Success " + response.body().getUserId(), Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    dialog.setVisibility(View.GONE);
                 } else if (response.body().getResponse().equals("failed")) {
                     Toast.makeText(PhoneRegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    dialog.setVisibility(View.GONE);
                 } else if (response.body().getResponse().equals("Already")) {
                     Toast.makeText(PhoneRegisterActivity.this, "Already Registered", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    dialog.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(PhoneRegisterActivity.this, "Something went wrong 2", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    dialog.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
 
-                Toast.makeText(PhoneRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+              //    Toast.makeText(PhoneRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                dialog.setVisibility(View.GONE);
 
             }
         });
