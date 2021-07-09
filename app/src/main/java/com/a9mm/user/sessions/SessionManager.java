@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 public class SessionManager {
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    public SharedPreferences sharedPreferences;
+    public SharedPreferences.Editor editor;
     Context context;
     int PRIVATE_MODE =0;
 

@@ -6,6 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ import com.a9mm.user.fragments_home.FragmentGoOut;
 import com.a9mm.user.fragments_home.FragmentGold;
 import com.a9mm.user.fragments_home.FragmentOrder;
 import com.a9mm.user.fragments_home.FragmentVideo;
+import com.a9mm.user.sessions.SessionManager;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,6 +37,7 @@ public class HomeMainActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout ll_First,ll_Second,ll_Third,ll_Fourth,ll_Fifth,ll_Sixth,ll_Seventh;
     NavigationView navigationView;
     TextView tv_logout;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class HomeMainActivity extends AppCompatActivity implements View.OnClickL
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         bottomNavigation = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigation);
+        sessionManager = new SessionManager(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new FragmentOrder()).commit();
         onSetNavigationDrawerEvents();
@@ -147,6 +152,14 @@ public class HomeMainActivity extends AppCompatActivity implements View.OnClickL
             case R.id.tv_logout:
                 showToast("tv_logout");
                 drawerLayout.closeDrawer(navigationView, true);
+
+                sessionManager.editor.clear();
+                sessionManager.editor.commit();
+
+                Intent intent = new Intent(HomeMainActivity.this, Login_Main_Activity.class);
+                startActivity(intent);
+                finish();
+                Animatoo.animateSlideRight(this);
                 break;
             default:
                 showToast("Default");

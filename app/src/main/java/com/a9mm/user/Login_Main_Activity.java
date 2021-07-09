@@ -42,8 +42,6 @@ public class Login_Main_Activity extends AppCompatActivity {
             startActivity(intent);
             finish();
             Animatoo.animateSlideLeft(this);
-        }else{
-
         }
 
     }
@@ -107,7 +105,7 @@ public class Login_Main_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Main_Activity.this, HomeMainActivity.class);
                 startActivity(intent);
-                Animatoo.animateShrink(Login_Main_Activity.this);
+                Animatoo.animateSlideLeft(Login_Main_Activity.this);
                 finish();
             }
         });
