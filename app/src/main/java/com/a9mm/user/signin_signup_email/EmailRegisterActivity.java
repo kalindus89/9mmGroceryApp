@@ -20,6 +20,7 @@ import com.a9mm.user.R;
 import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
+import com.a9mm.user.sessions.SessionManager;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
 import retrofit2.Call;
@@ -31,6 +32,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
     EditText password_user,email_user,name_user;
     Button conBtn;
     public  static ApiInterface apiInterface;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class EmailRegisterActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         apiInterface= ApiClient.getApiClient().create(ApiInterface.class);
+        sessionManager = new SessionManager(this);
 
         name_user = (EditText) findViewById(R.id.name_user);
         email_user = (EditText) findViewById(R.id.email_user);
@@ -76,7 +79,13 @@ public class EmailRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Users> call, Response<Users> response) {
                             if(response.body().getResponse().equals("ok")){
-                                Toast.makeText(EmailRegisterActivity.this, "Success Registration "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(EmailRegisterActivity.this, "Success Registration "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
+
+                                sessionManager.createSession(response.body().getUserId());
+                                Intent intent = new Intent(EmailRegisterActivity.this, HomeMainActivity.class);
+                                startActivity(intent);
+                                finish();
+                                Animatoo.animateSlideLeft(EmailRegisterActivity.this);
                                 dialog.dismiss();
                             }
                             else if(response.body().getResponse().equals("failed")){

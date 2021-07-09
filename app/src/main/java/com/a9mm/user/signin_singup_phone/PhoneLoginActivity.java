@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.a9mm.user.HomeMainActivity;
 import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
 import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
+import com.a9mm.user.sessions.SessionManager;
 import com.a9mm.user.signin_signup_email.EmailRegisterActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.bumptech.glide.Glide;
@@ -42,6 +44,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
     EditText phoneNumber, otp;
     Button conBtn, otpBtn;
     public static ApiInterface apiInterface;
+    SessionManager sessionManager;
 
     //phone otp
     private String mVerificationId;
@@ -59,6 +62,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        sessionManager = new SessionManager(this);
 
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
         otp = (EditText) findViewById(R.id.otp);
@@ -168,7 +172,13 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Users> call, Response<Users> response) {
                     if (response.body().getResponse().equals("ok")) {
-                        Toast.makeText(PhoneLoginActivity.this, "Login Success " + response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(PhoneLoginActivity.this, "Login Success " + response.body().getUserId(), Toast.LENGTH_SHORT).show();
+
+                        sessionManager.createSession(response.body().getUserId());
+                        Intent intent = new Intent(PhoneLoginActivity.this, HomeMainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Animatoo.animateSlideLeft(PhoneLoginActivity.this);
                         dialog.setVisibility(View.GONE);
                     } else if (response.body().getResponse().equals("No account")) {
                         Toast.makeText(PhoneLoginActivity.this, "No account", Toast.LENGTH_SHORT).show();

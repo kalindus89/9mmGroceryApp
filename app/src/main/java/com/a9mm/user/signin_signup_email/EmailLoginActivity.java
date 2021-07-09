@@ -14,11 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.a9mm.user.HomeMainActivity;
 import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
 import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
+import com.a9mm.user.sessions.SessionManager;
 import com.a9mm.user.signin_singup_phone.PhoneLoginActivity;
 import com.a9mm.user.signin_singup_phone.PhoneRegisterActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -32,6 +34,7 @@ public class EmailLoginActivity extends AppCompatActivity {
     EditText password_user,email_user;
     Button conBtn;
     public  static ApiInterface apiInterface;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class EmailLoginActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         apiInterface= ApiClient.getApiClient().create(ApiInterface.class);
+        sessionManager = new SessionManager(this);
 
         email_user = (EditText) findViewById(R.id.email_user);
         password_user = (EditText) findViewById(R.id.password_user);
@@ -73,7 +77,13 @@ public class EmailLoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Users> call, Response<Users> response) {
                             if(response.body().getResponse().equals("ok")){
-                                Toast.makeText(EmailLoginActivity.this, "Login Success "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(EmailLoginActivity.this, "Login Success "+response.body().getUserId(), Toast.LENGTH_SHORT).show();
+
+                                sessionManager.createSession(response.body().getUserId());
+                                Intent intent = new Intent(EmailLoginActivity.this, HomeMainActivity.class);
+                                startActivity(intent);
+                                finish();
+                                Animatoo.animateSlideLeft(EmailLoginActivity.this);
                                 dialog.dismiss();
                             }
                             else if(response.body().getResponse().equals("No account")){

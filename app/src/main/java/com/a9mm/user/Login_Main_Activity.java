@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.a9mm.user.adapters.PlateAdapter;
+import com.a9mm.user.sessions.SessionManager;
 import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.models.PlateModel;
 import com.a9mm.user.signin_singup_phone.PhoneLoginActivity;
@@ -30,14 +31,31 @@ public class Login_Main_Activity extends AppCompatActivity {
     private PlateAdapter plateAdapter;
     LinearLayout linear_email, linear_phone;
     Button skipToMainPage;
+    SessionManager sessionManager;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(sessionManager.isLogin()){
+            Intent intent = new Intent(Login_Main_Activity.this, HomeMainActivity.class);
+            startActivity(intent);
+            finish();
+            Animatoo.animateSlideLeft(this);
+        }else{
+
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main_activity);
 
-       //to hide statusbar
+        //to hide statusbar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sessionManager = new SessionManager(this);
 
         linear_email = (LinearLayout) findViewById(R.id.linear_email);
         linear_phone = (LinearLayout) findViewById(R.id.linear_phone);

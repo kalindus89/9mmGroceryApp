@@ -1,4 +1,4 @@
-package com.a9mm.user.signin_singup_phone;
+  package com.a9mm.user.signin_singup_phone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.a9mm.user.HomeMainActivity;
 import com.a9mm.user.Login_Main_Activity;
 import com.a9mm.user.R;
 import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
+import com.a9mm.user.sessions.SessionManager;
 import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.signin_signup_email.EmailRegisterActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -46,6 +48,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
     EditText phoneNumber, otp;
     Button conBtn, otpBtn;
     public static ApiInterface apiInterface;
+    SessionManager sessionManager;
 
     //phone otp
     private String mVerificationId;
@@ -63,6 +66,7 @@ public class PhoneRegisterActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        sessionManager = new SessionManager(this);
 
 
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
@@ -175,7 +179,12 @@ public class PhoneRegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
                 if (response.body().getResponse().equals("ok")) {
-                    Toast.makeText(PhoneRegisterActivity.this, "Registration Success " + response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(PhoneRegisterActivity.this, "Registration Success " + response.body().getUserId(), Toast.LENGTH_SHORT).show();
+                    sessionManager.createSession(response.body().getUserId());
+                    Intent intent = new Intent(PhoneRegisterActivity.this, HomeMainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Animatoo.animateSlideLeft(PhoneRegisterActivity.this);
                     dialog.setVisibility(View.GONE);
                 } else if (response.body().getResponse().equals("failed")) {
                     Toast.makeText(PhoneRegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
