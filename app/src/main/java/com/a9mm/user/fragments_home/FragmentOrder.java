@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import com.a9mm.user.R;
 import com.a9mm.user.adapters.BannerAdapter;
 import com.a9mm.user.adapters.CatAdapter;
+import com.a9mm.user.adapters.SimpleVerticalAdapter;
 import com.a9mm.user.models.BannerModel;
 import com.a9mm.user.models.CategoryModel;
+import com.a9mm.user.models.SimpleVerticalModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,10 @@ public class FragmentOrder extends Fragment {
     private RecyclerView bannerRecyclerView;
     private List<BannerModel> bannerModelList;
     private BannerAdapter bannerAdapter;
+
+    private RecyclerView simpleRecyclerView;
+    private List<SimpleVerticalModel> simpleVerticalModelList;
+    private SimpleVerticalAdapter simpleVerticalAdapter;
 
     public static FragmentOrder newInstance(String param1, String param2) {
         FragmentOrder fragment = new FragmentOrder();
@@ -125,6 +131,27 @@ public class FragmentOrder extends Fragment {
         bannerAdapter.notifyDataSetChanged();
 
 
+         // simple vertical model list
+        simpleRecyclerView = (RecyclerView) view.findViewById(R.id.simpleRecyclerView);
+        LinearLayoutManager layoutManageSimple = new LinearLayoutManager(getActivity());
+        layoutManageSimple.setOrientation(RecyclerView.VERTICAL);
+        simpleRecyclerView.setLayoutManager(layoutManageSimple);
+
+        simpleVerticalModelList = new ArrayList<>();
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+
+        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+        simpleRecyclerView.setAdapter(simpleVerticalAdapter);
+        simpleVerticalAdapter.notifyDataSetChanged();
 
     }
 }

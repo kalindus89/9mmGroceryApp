@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/proImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/skip_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo_app_grey" />
+
+    <TextView
+        android:id="@+id/simple_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Lanka Dal"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/simple_rating"
+        app:layout_constraintStart_toEndOf="@+id/proImg"
+        app:layout_constraintTop_toTopOf="@+id/proImg" />
+
+    <TextView
+        android:id="@+id/simple_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Yellow healthy food, eat everyday"
+        app:layout_constraintEnd_toEndOf="@+id/simple_title"
+        app:layout_constraintStart_toStartOf="@+id/simple_title"
+        app:layout_constraintTop_toBottomOf="@+id/simple_title" />
+
+    <TextView
+        android:id="@+id/simple_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Rs.100 per Kg | 2 hours"
+        app:layout_constraintEnd_toEndOf="@+id/simple_description"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/simple_description"
+        app:layout_constraintTop_toBottomOf="@+id/simple_description" />
+
+    <TextView
+        android:id="@+id/simple_coupon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="20% OFF - use code ZOMATO"
+        android:textColor="#FFC107"
+        app:layout_constraintEnd_toEndOf="@+id/simple_quantity"
+        app:layout_constraintStart_toStartOf="@+id/simple_quantity"
+        app:layout_constraintTop_toBottomOf="@+id/simple_quantity" />
+
+    <TextView
+        android:id="@+id/simple_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Well sanitized kitchen * Rider hand wash"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#2196F3"
+        app:layout_constraintStart_toStartOf="@+id/simple_coupon"
+        app:layout_constraintTop_toBottomOf="@+id/simple_coupon" />
+
+    <TextView
+        android:id="@+id/simple_rating"
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_border"
+        android:backgroundTint="#4CAF50"
+        android:padding="5dp"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="4.6"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/simple_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/simple_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>
