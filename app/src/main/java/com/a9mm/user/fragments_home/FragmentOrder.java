@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import com.a9mm.user.R;
 import com.a9mm.user.adapters.BannerAdapter;
 import com.a9mm.user.adapters.CatAdapter;
+import com.a9mm.user.adapters.GreatOffersAdapter;
 import com.a9mm.user.adapters.SimpleVerticalAdapter;
 import com.a9mm.user.models.BannerModel;
 import com.a9mm.user.models.CategoryModel;
+import com.a9mm.user.models.GreatOffersModel;
 import com.a9mm.user.models.SimpleVerticalModel;
 
 import java.util.ArrayList;
@@ -45,6 +47,14 @@ public class FragmentOrder extends Fragment {
     private RecyclerView simpleRecyclerView;
     private List<SimpleVerticalModel> simpleVerticalModelList;
     private SimpleVerticalAdapter simpleVerticalAdapter;
+
+    private RecyclerView greatHorizontalRecyclerView;
+    private List<GreatOffersModel> greatOffersModelList;
+    private GreatOffersAdapter greatOffersAdapter;
+
+    private RecyclerView simpleSecondVerticalRecyclerView;
+    private RecyclerView newArriveHorizontalRecyclerView;
+    private RecyclerView newArriveVerticalRecyclerView;
 
     public static FragmentOrder newInstance(String param1, String param2) {
         FragmentOrder fragment = new FragmentOrder();
@@ -80,7 +90,7 @@ public class FragmentOrder extends Fragment {
 
     private void init() {
 
-        // category list display
+        // (1) category list display
         catRecyclerView = (RecyclerView) view.findViewById(R.id.catRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -106,8 +116,9 @@ public class FragmentOrder extends Fragment {
         catRecyclerView.setAdapter(catAdapter);
         catAdapter.notifyDataSetChanged();
 
+        // End of category list display
+        // (2)  banner list display
 
-        // banner list display
         bannerRecyclerView = (RecyclerView) view.findViewById(R.id.bannerRecyclerView);
         LinearLayoutManager layoutManagerBanner = new LinearLayoutManager(getActivity());
         layoutManagerBanner.setOrientation(RecyclerView.HORIZONTAL);
@@ -130,28 +141,101 @@ public class FragmentOrder extends Fragment {
         bannerRecyclerView.setAdapter(bannerAdapter);
         bannerAdapter.notifyDataSetChanged();
 
+        // End of banner list
+        // (3) simple vertical model list
 
-         // simple vertical model list
         simpleRecyclerView = (RecyclerView) view.findViewById(R.id.simpleRecyclerView);
         LinearLayoutManager layoutManageSimple = new LinearLayoutManager(getActivity());
         layoutManageSimple.setOrientation(RecyclerView.VERTICAL);
         simpleRecyclerView.setLayoutManager(layoutManageSimple);
 
         simpleVerticalModelList = new ArrayList<>();
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
 
         simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
         simpleRecyclerView.setAdapter(simpleVerticalAdapter);
         simpleVerticalAdapter.notifyDataSetChanged();
 
+        // End of Simple Vertical List
+        // (4) Great Offers List
+
+        greatHorizontalRecyclerView = (RecyclerView) view.findViewById(R.id.greatHorizontalRecyclerView);
+        LinearLayoutManager layoutManageGreatOffers = new LinearLayoutManager(getActivity());
+        layoutManageGreatOffers.setOrientation(RecyclerView.HORIZONTAL);
+        greatHorizontalRecyclerView.setLayoutManager(layoutManageGreatOffers);
+
+        greatOffersModelList = new ArrayList<>();
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+
+        greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
+        greatHorizontalRecyclerView.setAdapter(greatOffersAdapter);
+        greatOffersAdapter.notifyDataSetChanged();
+
+        // End of Offers List
+        // (5) Second Simple Vertical List
+
+        simpleSecondVerticalRecyclerView = (RecyclerView) view.findViewById(R.id.simpleSecondVerticalRecyclerView);
+        LinearLayoutManager layoutManageSimpleSecond = new LinearLayoutManager(getActivity());
+        layoutManageSimpleSecond.setOrientation(RecyclerView.VERTICAL);
+        simpleSecondVerticalRecyclerView.setLayoutManager(layoutManageSimpleSecond);
+
+        simpleVerticalModelList = new ArrayList<>();
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+
+        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+        simpleSecondVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
+        simpleVerticalAdapter.notifyDataSetChanged();
+
+        // End of Second Simple Vertical List
+        // (6) newArriveHorizontalRecyclerView List
+
+        newArriveHorizontalRecyclerView = (RecyclerView) view.findViewById(R.id.newArriveHorizontalRecyclerView);
+        LinearLayoutManager layoutManageNewArriveHorizontal = new LinearLayoutManager(getActivity());
+        layoutManageNewArriveHorizontal.setOrientation(RecyclerView.HORIZONTAL);
+        newArriveHorizontalRecyclerView.setLayoutManager(layoutManageNewArriveHorizontal);
+
+        greatOffersModelList = new ArrayList<>();
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+
+        greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
+        newArriveHorizontalRecyclerView.setAdapter(greatOffersAdapter);
+        greatOffersAdapter.notifyDataSetChanged();
+
+        // End of newArriveHorizontalRecyclerView
+        // (7) newArriveVerticalRecyclerView List
+
+        newArriveVerticalRecyclerView = (RecyclerView) view.findViewById(R.id.newArriveVerticalRecyclerView);
+        LinearLayoutManager layoutManageNewArriveVertical = new LinearLayoutManager(getActivity());
+        layoutManageNewArriveVertical.setOrientation(RecyclerView.VERTICAL);
+        newArriveVerticalRecyclerView.setLayoutManager(layoutManageNewArriveVertical);
+
+        simpleVerticalModelList = new ArrayList<>();
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
+
+        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+        newArriveVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
+        simpleVerticalAdapter.notifyDataSetChanged();
     }
 }

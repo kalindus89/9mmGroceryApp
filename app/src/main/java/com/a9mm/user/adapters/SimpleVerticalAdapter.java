@@ -21,9 +21,9 @@ public class SimpleVerticalAdapter extends RecyclerView.Adapter<SimpleVerticalAd
     private Context context;
     private List<SimpleVerticalModel> simpleVerticalModelList;
 
-    public SimpleVerticalAdapter(Context context, List<SimpleVerticalModel> categoryModelList) {
+    public SimpleVerticalAdapter(Context context, List<SimpleVerticalModel> simpleVerticalModelList) {
         this.context = context;
-        this.simpleVerticalModelList = categoryModelList;
+        this.simpleVerticalModelList = simpleVerticalModelList;
     }
 
     @NonNull
