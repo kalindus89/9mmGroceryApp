@@ -29,4 +29,6 @@ public interface ApiInterface {
             @Query("user_phone") String user_phone
     );
 
+    @GET("categories.php")
+    Call<Users> getCategories();
 }

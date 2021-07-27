@@ -17,9 +17,16 @@ import com.a9mm.user.models.BannerModel;
 import com.a9mm.user.models.CategoryModel;
 import com.a9mm.user.models.GreatOffersModel;
 import com.a9mm.user.models.SimpleVerticalModel;
+import com.a9mm.user.retrofit_api.ApiClient;
+import com.a9mm.user.retrofit_api.ApiInterface;
+import com.a9mm.user.retrofit_api.Users;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +63,8 @@ public class FragmentOrder extends Fragment {
     private RecyclerView newArriveHorizontalRecyclerView;
     private RecyclerView newArriveVerticalRecyclerView;
 
+    public static ApiInterface apiInterface;
+
     public static FragmentOrder newInstance(String param1, String param2) {
         FragmentOrder fragment = new FragmentOrder();
         Bundle args = new Bundle();
@@ -83,6 +92,7 @@ public class FragmentOrder extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_order, container, false);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         init();
         return view;
@@ -97,24 +107,24 @@ public class FragmentOrder extends Fragment {
         catRecyclerView.setLayoutManager(layoutManager);
 
         categoryModelList = new ArrayList<>();
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Grocery & Staples"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Vegetables & Fruits"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Personal Care"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Household Items"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Home & Kitchen"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Biscuits * Chocolates"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Beverages"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Breakfast & Diary"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Best Values"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Noodles & Instant Foods"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Furnishing & Home Needs"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Baby Care"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Pet Care"));
-        categoryModelList.add(new CategoryModel(R.drawable.logo_app_grey,"Fashion"));
 
-        catAdapter = new CatAdapter(getActivity(), categoryModelList);
-        catRecyclerView.setAdapter(catAdapter);
-        catAdapter.notifyDataSetChanged();
+        Call<Users> categoryCall = apiInterface.getCategories() ;
+        categoryCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+
+                // database column names nand adaper ides must match: eg: both as to cat_title or cat_image
+                categoryModelList = response.body().getCategory();
+                catAdapter = new CatAdapter(getActivity(), categoryModelList);
+                catRecyclerView.setAdapter(catAdapter);
+                catAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
 
         // End of category list display
         // (2)  banner list display

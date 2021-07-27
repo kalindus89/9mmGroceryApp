@@ -39,7 +39,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CategoryViewHold
         CategoryModel categoryModel = categoryModelList.get(position);
 
         holder.cat_title.setText(categoryModel.getCat_title());
-        Glide.with(context).load(categoryModel .getCat_img() ).placeholder(R.drawable.logo_app_grey). into(holder.cat_image);
+        Glide.with(context).load(categoryModel .getCat_image() ).placeholder(R.drawable.logo_app_grey). into(holder.cat_image);
     }
 
     @Override

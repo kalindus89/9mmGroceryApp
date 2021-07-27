@@ -6,20 +6,20 @@ public class CategoryModel {
         // empty constructor
     }
 
-    private int cat_img;
+    private String cat_image;
     private String cat_title;
 
-    public CategoryModel(int cat_img, String cat_title) {
-        this.cat_img=cat_img;
-        this.cat_title=cat_title;
+    public CategoryModel(String cat_image, String cat_title) {
+        this.cat_image = cat_image;
+        this.cat_title = cat_title;
     }
 
-    public int getCat_img() {
-        return cat_img;
+    public String getCat_image() {
+        return cat_image;
     }
 
-    public void setCat_img(int cat_img) {
-        this.cat_img = cat_img;
+    public void setCat_image(String cat_image) {
+        this.cat_image = cat_image;
     }
 
     public String getCat_title() {
