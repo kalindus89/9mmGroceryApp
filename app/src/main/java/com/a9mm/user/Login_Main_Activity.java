@@ -14,7 +14,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.a9mm.user.adapters.CatAdapter;
 import com.a9mm.user.adapters.PlateAdapter;
+import com.a9mm.user.retrofit_api.ApiClient;
+import com.a9mm.user.retrofit_api.ApiInterface;
+import com.a9mm.user.retrofit_api.Users;
 import com.a9mm.user.sessions.SessionManager;
 import com.a9mm.user.signin_signup_email.EmailLoginActivity;
 import com.a9mm.user.models.PlateModel;
@@ -24,6 +28,10 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Login_Main_Activity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -32,6 +40,8 @@ public class Login_Main_Activity extends AppCompatActivity {
     LinearLayout linear_email, linear_phone;
     Button skipToMainPage;
     SessionManager sessionManager;
+
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onStart() {
@@ -55,6 +65,8 @@ public class Login_Main_Activity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sessionManager = new SessionManager(this);
 
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
         linear_email = (LinearLayout) findViewById(R.id.linear_email);
         linear_phone = (LinearLayout) findViewById(R.id.linear_phone);
         skipToMainPage = (Button) findViewById(R.id.buttonSkip);
@@ -67,18 +79,37 @@ public class Login_Main_Activity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         plateModelList = new ArrayList<>();
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));
 
-        plateAdapter = new PlateAdapter(this, plateModelList);
-        recyclerView.setAdapter(plateAdapter);
-        plateAdapter.notifyDataSetChanged();
+        Call<Users> categoryCall = apiInterface.getCategoriesPlate();
+        categoryCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
 
-        autoScroll();
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+
+               System.out.println("aaaaaaaaaa "+response.body().getCategoryPlate().toString());
+                plateModelList= response.body().getCategoryPlate();
+                plateAdapter = new PlateAdapter(Login_Main_Activity.this, plateModelList);
+                recyclerView.setAdapter(plateAdapter);
+                plateAdapter.notifyDataSetChanged();
+                autoScroll();
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+       /* plateModelList.add(new PlateModel(R.drawable.buger_one));
+        plateModelList.add(new PlateModel(R.drawable.buger_one));
+        plateModelList.add(new PlateModel(R.drawable.buger_one));
+        plateModelList.add(new PlateModel(R.drawable.buger_one));
+        plateModelList.add(new PlateModel(R.drawable.buger_one));
+        plateModelList.add(new PlateModel(R.drawable.buger_one));*/
+
+
+
+      //
         //this function is for auto scrolling the listview
         linear_email.setOnClickListener(new View.OnClickListener() {
             @Override

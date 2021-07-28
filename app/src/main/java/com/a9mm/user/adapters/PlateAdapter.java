@@ -36,7 +36,8 @@ public class PlateAdapter extends RecyclerView.Adapter<PlateAdapter.PlateViewHol
     @Override
     public void onBindViewHolder(@NonNull PlateViewHolder holder, int position) {
         PlateModel plateModel = plateModelList.get(position);
-        Glide.with(context).load(plateModel.getPlate_img()).into(holder.plateImg);
+        //Glide.with(context).load(plateModel.getPlate_img()).into(holder.plateImg);
+        Glide.with(context).load(plateModel .getPlate_img() ).placeholder(R.drawable.logo_app_grey). into(holder.plateImg);
     }
 
     @Override

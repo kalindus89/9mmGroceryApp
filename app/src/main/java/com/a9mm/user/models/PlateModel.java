@@ -6,17 +6,17 @@ public class PlateModel {
         // empty constructor
     }
 
-    private int plate_img;
+    private String cat_image;
 
-    public PlateModel(int plate_img) {
-        this.plate_img=plate_img;
+    public PlateModel(String cat_image) {
+        this.cat_image=cat_image;
     }
 
-    public void setPlate_img(int plate_img) {
-        this.plate_img = plate_img;
+    public void setPlate_img(String cat_image) {
+        this.cat_image = cat_image;
     }
 
-    public int getPlate_img() {
-        return plate_img;
+    public String getPlate_img() {
+        return cat_image;
     }
 }

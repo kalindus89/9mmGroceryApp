@@ -1,6 +1,7 @@
 package com.a9mm.user.retrofit_api;
 
 import com.a9mm.user.models.CategoryModel;
+import com.a9mm.user.models.PlateModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class Users {
     @SerializedName("categories")
     private List<CategoryModel> category;
 
+    @SerializedName("categories2")
+    private List<PlateModel> categoryPlate;
+
     public String getResponse() {
         return response;
     }
@@ -26,5 +30,9 @@ public class Users {
 
     public List<CategoryModel> getCategory() {
         return category;
+    }
+
+    public List<PlateModel> getCategoryPlate() {
+        return categoryPlate;
     }
 }

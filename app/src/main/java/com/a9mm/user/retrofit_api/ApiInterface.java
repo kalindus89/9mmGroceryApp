@@ -31,4 +31,8 @@ public interface ApiInterface {
 
     @GET("categories.php")
     Call<Users> getCategories();
+
+    @GET("categories_login.php")
+    Call<Users> getCategoriesPlate();
+
 }

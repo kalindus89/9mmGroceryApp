@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/plateImg"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -18,5 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/buger_one"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#9F9B9B"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -114,7 +114,8 @@ public class FragmentOrder extends Fragment {
             public void onResponse(Call<Users> call, Response<Users> response) {
 
 
-                // database column names nand adaper ides must match: eg: both as to cat_title or cat_image
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+
                 categoryModelList = response.body().getCategory();
                 catAdapter = new CatAdapter(getActivity(), categoryModelList);
                 catRecyclerView.setAdapter(catAdapter);
