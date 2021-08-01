@@ -37,7 +37,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
     @Override
     public void onBindViewHolder(@NonNull BannerViewHolder holder, int position) {
         BannerModel plateModel = bannerModelList.get(position);
-        Glide.with(context).load(plateModel.getBanner_img()).placeholder(R.drawable.logo_app_grey).into(holder.bannerImg);
+        Glide.with(context).load(plateModel.getBanner_image()).placeholder(R.drawable.logo_app_grey).into(holder.bannerImg);
     }
 
     @Override

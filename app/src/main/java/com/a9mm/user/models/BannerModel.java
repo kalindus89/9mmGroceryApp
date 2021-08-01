@@ -2,21 +2,24 @@ package com.a9mm.user.models;
 
 public class BannerModel {
 
+
+    private String banner_image;
+
     public BannerModel() {
         // empty constructor
     }
 
-    private int banner_img;
-
-    public BannerModel(int banner_img) {
-        this.banner_img=banner_img;
+    public BannerModel(String banner_image) {
+        this.banner_image = banner_image;
     }
 
-    public void setBanner_img(int banner_img) {
-        this.banner_img = banner_img;
+    public void setBanner_image(String banner_image) {
+        this.banner_image = banner_image;
     }
 
-    public int getBanner_img() {
-        return banner_img;
+    public String getBanner_image() {
+        return banner_image;
     }
+
+
 }

@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.a9mm.user.R;
 import com.a9mm.user.adapters.BannerAdapter;
 import com.a9mm.user.adapters.CatAdapter;
@@ -20,6 +22,7 @@ import com.a9mm.user.models.SimpleVerticalModel;
 import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,7 @@ public class FragmentOrder extends Fragment {
     private String mParam1;
     private String mParam2;
     private View view;
+    private ImageView getStripBanner;
 
     private RecyclerView catRecyclerView;
     private List<CategoryModel> categoryModelList;
@@ -101,6 +105,23 @@ public class FragmentOrder extends Fragment {
     private void init() {
 
         // (1) category list display
+        getStripBanner = (ImageView) view.findViewById(R.id.getStripBanner);
+
+        Call<Users> stripBannerCall = apiInterface.getStripBanner() ; //change here
+        stripBannerCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+                Glide.with(getActivity()).load(response.body().getStrip_banner_image()).placeholder(R.drawable.logo_app_grey). into(getStripBanner
+                );
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
         catRecyclerView = (RecyclerView) view.findViewById(R.id.catRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -108,7 +129,7 @@ public class FragmentOrder extends Fragment {
 
         categoryModelList = new ArrayList<>();
 
-        Call<Users> categoryCall = apiInterface.getCategories() ;
+        Call<Users> categoryCall = apiInterface.getCategories() ; //change here
         categoryCall.enqueue(new Callback<Users>() {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
@@ -116,7 +137,7 @@ public class FragmentOrder extends Fragment {
 
                 // database column names and Model names must match: eg: both as to cat_title or cat_image
 
-                categoryModelList = response.body().getCategory();
+                categoryModelList = response.body().getCategory(); //change here
                 catAdapter = new CatAdapter(getActivity(), categoryModelList);
                 catRecyclerView.setAdapter(catAdapter);
                 catAdapter.notifyDataSetChanged();
@@ -136,21 +157,28 @@ public class FragmentOrder extends Fragment {
         bannerRecyclerView.setLayoutManager(layoutManagerBanner);
 
         bannerModelList = new ArrayList<>();
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
-        bannerModelList.add(new BannerModel(R.drawable.logo_app_grey));
 
-        bannerAdapter = new BannerAdapter(getActivity(),bannerModelList);
-        bannerRecyclerView.setAdapter(bannerAdapter);
-        bannerAdapter.notifyDataSetChanged();
+        Call<Users> bannerModelCall = apiInterface.getAllBanners() ; //change here
+        bannerModelCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                bannerModelList = response.body().getBannerModelList(); //change here
+                bannerAdapter = new BannerAdapter(getActivity(),bannerModelList);
+                bannerRecyclerView.setAdapter(bannerAdapter);
+                bannerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
+
+
 
         // End of banner list
         // (3) simple vertical model list

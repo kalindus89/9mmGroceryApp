@@ -35,4 +35,10 @@ public interface ApiInterface {
     @GET("categories_login.php")
     Call<Users> getCategoriesPlate();
 
+    @GET("banners.php")
+    Call<Users> getAllBanners();
+
+    @GET("strip_banner.php")
+    Call<Users> getStripBanner();
+
 }

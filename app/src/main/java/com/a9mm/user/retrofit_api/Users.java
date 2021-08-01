@@ -1,5 +1,6 @@
 package com.a9mm.user.retrofit_api;
 
+import com.a9mm.user.models.BannerModel;
 import com.a9mm.user.models.CategoryModel;
 import com.a9mm.user.models.PlateModel;
 import com.google.gson.annotations.SerializedName;
@@ -14,11 +15,17 @@ public class Users {
     @SerializedName("user_id")
     private String userId;
 
+    @SerializedName("strip_banner_image")
+    private String strip_banner_image;
+
     @SerializedName("categories")
     private List<CategoryModel> category;
 
     @SerializedName("categories2")
     private List<PlateModel> categoryPlate;
+
+    @SerializedName("banners")
+    private List<BannerModel> bannerModelList;
 
     public String getResponse() {
         return response;
@@ -34,5 +41,12 @@ public class Users {
 
     public List<PlateModel> getCategoryPlate() {
         return categoryPlate;
+    }
+
+    public List<BannerModel> getBannerModelList() {
+        return bannerModelList;
+    }
+    public String getStrip_banner_image() {
+        return strip_banner_image;
     }
 }
