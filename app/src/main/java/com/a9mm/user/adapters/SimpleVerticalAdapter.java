@@ -38,13 +38,13 @@ public class SimpleVerticalAdapter extends RecyclerView.Adapter<SimpleVerticalAd
     public void onBindViewHolder(@NonNull SimpleVerticalViewHolder holder, int position) {
         SimpleVerticalModel simpleVerticalModel = simpleVerticalModelList.get(position);
 
-        holder.simple_title.setText(simpleVerticalModel.getSimple_title());
-        holder.simple_description.setText(simpleVerticalModel.getSimple_description());
-        holder.simple_coupon.setText(simpleVerticalModel.getSimple_coupon());
-        holder.simple_quantity.setText(simpleVerticalModel.getSimple_quantity());
-        holder.simple_status.setText(simpleVerticalModel.getSimple_status());
-        holder.simple_rating.setText(simpleVerticalModel.getSimple_rating());
-        Glide.with(context).load(simpleVerticalModel.getPro_img()). into(holder.proImg);
+        holder.shop_name.setText(simpleVerticalModel.getShop_name());
+        holder.shop_owner_name.setText(simpleVerticalModel.getShop_owner_name());
+        holder.shop_location.setText(simpleVerticalModel.getLandmark());
+        holder.shop_discount.setText(simpleVerticalModel.getDiscount()+" - use code "+simpleVerticalModel.getCoupon());
+        holder.shop_description.setText(simpleVerticalModel.getDescription());
+        holder.shop_rating.setText(simpleVerticalModel.getRating());
+        Glide.with(context).load(simpleVerticalModel.getShop_image()).placeholder(R.drawable.logo_app_grey).into(holder.proImg);
     }
 
     @Override
@@ -55,17 +55,17 @@ public class SimpleVerticalAdapter extends RecyclerView.Adapter<SimpleVerticalAd
     public class SimpleVerticalViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView proImg;
-        private TextView simple_title,simple_description, simple_coupon, simple_quantity, simple_status, simple_rating;
+        private TextView shop_owner_name,shop_location, shop_name, shop_discount, shop_rating, shop_description;
 
         public SimpleVerticalViewHolder(@NonNull View itemView) {
             super(itemView);
             proImg = (ImageView) itemView.findViewById(R.id.proImg);
-            simple_title = (TextView) itemView.findViewById(R.id.simple_description);
-            simple_description = (TextView) itemView.findViewById(R.id.simple_quantity);
-            simple_coupon = (TextView) itemView.findViewById(R.id.simple_coupon);
-            simple_quantity = (TextView) itemView.findViewById(R.id.simple_status);
-            simple_status = (TextView) itemView.findViewById(R.id.simple_rating);
-            simple_rating = (TextView) itemView.findViewById(R.id.simple_rating);
+            shop_name = (TextView) itemView.findViewById(R.id.shop_name);
+            shop_owner_name = (TextView) itemView.findViewById(R.id.shop_owner_name);
+            shop_location = (TextView) itemView.findViewById(R.id.shop_location);
+            shop_discount = (TextView) itemView.findViewById(R.id.shop_discount);
+            shop_description = (TextView) itemView.findViewById(R.id.shop_description);
+            shop_rating = (TextView) itemView.findViewById(R.id.shop_rating);
         }
     }
 }

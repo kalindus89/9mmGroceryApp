@@ -14,6 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/skip_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,59 +23,59 @@
         app:srcCompat="@drawable/logo_app_grey" />
 
     <TextView
-        android:id="@+id/simple_title"
+        android:id="@+id/shop_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Lanka Dal"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/simple_rating"
+        app:layout_constraintEnd_toStartOf="@+id/shop_rating"
         app:layout_constraintStart_toEndOf="@+id/proImg"
         app:layout_constraintTop_toTopOf="@+id/proImg" />
 
     <TextView
-        android:id="@+id/simple_description"
+        android:id="@+id/shop_owner_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Yellow healthy food, eat everyday"
-        app:layout_constraintEnd_toEndOf="@+id/simple_title"
-        app:layout_constraintStart_toStartOf="@+id/simple_title"
-        app:layout_constraintTop_toBottomOf="@+id/simple_title" />
+        app:layout_constraintEnd_toEndOf="@+id/shop_name"
+        app:layout_constraintStart_toStartOf="@+id/shop_name"
+        app:layout_constraintTop_toBottomOf="@+id/shop_name" />
 
     <TextView
-        android:id="@+id/simple_quantity"
+        android:id="@+id/shop_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Rs.100 per Kg | 2 hours"
-        app:layout_constraintEnd_toEndOf="@+id/simple_description"
+        app:layout_constraintEnd_toEndOf="@+id/shop_owner_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/simple_description"
-        app:layout_constraintTop_toBottomOf="@+id/simple_description" />
+        app:layout_constraintStart_toStartOf="@+id/shop_owner_name"
+        app:layout_constraintTop_toBottomOf="@+id/shop_owner_name" />
 
     <TextView
-        android:id="@+id/simple_coupon"
+        android:id="@+id/shop_discount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="20% OFF - use code ZOMATO"
         android:textColor="#FFC107"
-        app:layout_constraintEnd_toEndOf="@+id/simple_quantity"
-        app:layout_constraintStart_toStartOf="@+id/simple_quantity"
-        app:layout_constraintTop_toBottomOf="@+id/simple_quantity" />
+        app:layout_constraintEnd_toEndOf="@+id/shop_location"
+        app:layout_constraintStart_toStartOf="@+id/shop_location"
+        app:layout_constraintTop_toBottomOf="@+id/shop_location" />
 
     <TextView
-        android:id="@+id/simple_status"
+        android:id="@+id/shop_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Well sanitized kitchen * Rider hand wash"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="#2196F3"
-        app:layout_constraintStart_toStartOf="@+id/simple_coupon"
-        app:layout_constraintTop_toBottomOf="@+id/simple_coupon" />
+        app:layout_constraintStart_toStartOf="@+id/shop_discount"
+        app:layout_constraintTop_toBottomOf="@+id/shop_discount" />
 
     <TextView
-        android:id="@+id/simple_rating"
+        android:id="@+id/shop_rating"
         android:layout_width="35dp"
         android:layout_height="28dp"
         android:layout_marginEnd="16dp"
@@ -85,7 +86,7 @@
         android:gravity="center"
         android:text="4.6"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/simple_title"
+        app:layout_constraintBottom_toBottomOf="@+id/shop_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/simple_title" />
+        app:layout_constraintTop_toTopOf="@+id/shop_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

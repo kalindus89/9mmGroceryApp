@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.a9mm.user.R;
 import com.a9mm.user.models.GreatOffersModel;
-import com.a9mm.user.models.SimpleVerticalModel;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -39,11 +38,11 @@ public class GreatOffersAdapter extends RecyclerView.Adapter<GreatOffersAdapter.
     public void onBindViewHolder(@NonNull GreatOffersViewHolder holder, int position) {
         GreatOffersModel greatOffersModel = greatOffersModelList.get(position);
 
-        holder.offers_shop_name.setText(greatOffersModel.getOffers_shop_name());
-        holder.offers_time.setText(greatOffersModel.getOffers_time());
-        holder.offers_discount.setText(greatOffersModel.getOffers_discount());
-        holder.offers_rating.setText(greatOffersModel.getOffers_rating());
-        Glide.with(context).load(greatOffersModel.getOffers_shop_img()).placeholder(R.drawable.logo_app_grey).into(holder.offers_shop_img);
+        holder.offers_shop_name.setText(greatOffersModel.getShop_name());
+        holder.shop_landmark.setText(greatOffersModel.getLandmark());
+        holder.offers_discount.setText(greatOffersModel.getDiscount());
+        holder.offers_rating.setText(greatOffersModel.getRating());
+        Glide.with(context).load(greatOffersModel.getShop_image()).placeholder(R.drawable.logo_app_grey).into(holder.offers_shop_img);
     }
 
     @Override
@@ -55,13 +54,13 @@ public class GreatOffersAdapter extends RecyclerView.Adapter<GreatOffersAdapter.
     public class GreatOffersViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView offers_shop_img;
-        private  TextView offers_shop_name, offers_time, offers_discount, offers_rating;
+        private  TextView offers_shop_name, shop_landmark, offers_discount, offers_rating;
 
         public GreatOffersViewHolder(@NonNull View itemView) {
             super(itemView);
             offers_shop_img = (ImageView) itemView.findViewById(R.id.offers_shop_img);
             offers_shop_name = (TextView) itemView.findViewById(R.id.offers_shop_name);
-            offers_time = (TextView) itemView.findViewById(R.id.offers_time);
+            shop_landmark = (TextView) itemView.findViewById(R.id.shop_landmark);
             offers_discount = (TextView) itemView.findViewById(R.id.offers_discount);
             offers_rating = (TextView) itemView.findViewById(R.id.offers_rating);
         }

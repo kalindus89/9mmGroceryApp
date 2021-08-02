@@ -189,13 +189,28 @@ public class FragmentOrder extends Fragment {
         simpleRecyclerView.setLayoutManager(layoutManageSimple);
 
         simpleVerticalModelList = new ArrayList<>();
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 1","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
 
-        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
-        simpleRecyclerView.setAdapter(simpleVerticalAdapter);
-        simpleVerticalAdapter.notifyDataSetChanged();
+        Call<Users> randomShopslCall = apiInterface.getRandomShops(); //change here
+        randomShopslCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                simpleVerticalModelList = response.body().getSimpleVerticalModelList(); //change here
+                simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+                simpleRecyclerView.setAdapter(simpleVerticalAdapter);
+                simpleVerticalAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
+
+
 
         // End of Simple Vertical List
         // (4) Great Offers List
@@ -206,19 +221,24 @@ public class FragmentOrder extends Fragment {
         greatHorizontalRecyclerView.setLayoutManager(layoutManageGreatOffers);
 
         greatOffersModelList = new ArrayList<>();
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 1","39 mins","32% OFF","3.9"));
+        Call<Users> greatOfferShopslCall = apiInterface.getGreatOfferShops(); //change here
+        greatOfferShopslCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
 
-        greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
-        greatHorizontalRecyclerView.setAdapter(greatOffersAdapter);
-        greatOffersAdapter.notifyDataSetChanged();
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                greatOffersModelList = response.body().getGreatOffersModelList(); //change here
+                greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
+                greatHorizontalRecyclerView.setAdapter(greatOffersAdapter);
+                greatOffersAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
 
         // End of Offers List
         // (5) Second Simple Vertical List
@@ -229,13 +249,26 @@ public class FragmentOrder extends Fragment {
         simpleSecondVerticalRecyclerView.setLayoutManager(layoutManageSimpleSecond);
 
         simpleVerticalModelList = new ArrayList<>();
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 2","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
 
-        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
-        simpleSecondVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
-        simpleVerticalAdapter.notifyDataSetChanged();
+        Call<Users> greatOfferVerticalCall = apiInterface.getGreatOfferShopsVertical(); //change here
+        greatOfferVerticalCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                simpleVerticalModelList = response.body().getGreat_offers_shops_vertical(); //change here
+                simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+                simpleSecondVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
+                simpleVerticalAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
 
         // End of Second Simple Vertical List
         // (6) newArriveHorizontalRecyclerView List
@@ -246,18 +279,25 @@ public class FragmentOrder extends Fragment {
         newArriveHorizontalRecyclerView.setLayoutManager(layoutManageNewArriveHorizontal);
 
         greatOffersModelList = new ArrayList<>();
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
-        greatOffersModelList.add(new GreatOffersModel(R.drawable.logo_app_grey,"Vegetable Junction 2","39 mins","32% OFF","3.9"));
+        Call<Users> newArrivalCall = apiInterface.get_new_arrivals_Shops(); //change here
+        newArrivalCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
 
-        greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
-        newArriveHorizontalRecyclerView.setAdapter(greatOffersAdapter);
-        greatOffersAdapter.notifyDataSetChanged();
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                greatOffersModelList = response.body().getNewArrivalList(); //change here
+                greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
+                newArriveHorizontalRecyclerView.setAdapter(greatOffersAdapter);
+                greatOffersAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
 
         // End of newArriveHorizontalRecyclerView
         // (7) newArriveVerticalRecyclerView List
@@ -268,13 +308,25 @@ public class FragmentOrder extends Fragment {
         newArriveVerticalRecyclerView.setLayoutManager(layoutManageNewArriveVertical);
 
         simpleVerticalModelList = new ArrayList<>();
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
-        simpleVerticalModelList.add(new SimpleVerticalModel(R.drawable.logo_app_grey,"Lanka Dal 3","Yellow healthy food, eat everyday","20% OFF - use code ZOMATO","Rs.100 per Kg | 2 hours","Well sanitized kitchen * Rider hand wash","4.6"));
 
-        simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
-        newArriveVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
-        simpleVerticalAdapter.notifyDataSetChanged();
+        Call<Users> newArrivalVerticalCall = apiInterface.getNew_Arrivals_Shops_Vertical(); //change here
+        newArrivalVerticalCall.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+
+
+                // database column names and Model names must match: eg: both as to cat_title or cat_image
+                simpleVerticalModelList = response.body().getNewArrivalVerticalList(); //change here
+                simpleVerticalAdapter = new SimpleVerticalAdapter(getActivity(),simpleVerticalModelList);
+                newArriveVerticalRecyclerView.setAdapter(simpleVerticalAdapter);
+                simpleVerticalAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable t) {
+            }
+        });
+
     }
 }

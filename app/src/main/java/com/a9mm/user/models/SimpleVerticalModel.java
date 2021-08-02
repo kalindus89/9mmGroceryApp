@@ -6,72 +6,48 @@ public class SimpleVerticalModel {
         // empty constructor
     }
 
-    private int pro_img;
-    private String simple_title, simple_description, simple_coupon, simple_quantity, simple_status, simple_rating;
+    private String shop_name,shop_owner_name,description,coupon,shop_image,rating,landmark,discount;
 
-    public SimpleVerticalModel(int pro_img, String simple_title, String simple_description, String simple_coupon, String simple_quantity, String simple_status, String simple_rating) {
-        this.pro_img = pro_img;
-        this.simple_title = simple_title;
-        this.simple_description = simple_description;
-        this.simple_coupon = simple_coupon;
-        this.simple_quantity = simple_quantity;
-        this.simple_status = simple_status;
-        this.simple_rating = simple_rating;
+    public SimpleVerticalModel(String shop_name, String shop_owner_name, String description, String coupon, String shop_image, String rating, String landmark, String discount) {
+        this.shop_name = shop_name;
+        this.shop_owner_name = shop_owner_name;
+        this.description = description;
+        this.coupon = coupon;
+        this.shop_image = shop_image;
+        this.rating = rating;
+        this.landmark = landmark;
+        this.discount = discount;
     }
 
-    public String getSimple_rating() {
-        return simple_rating;
+    public String getShop_name() {
+        return shop_name;
     }
 
-    public void setSimple_rating(String simple_rating) {
-        this.simple_rating = simple_rating;
+    public String getShop_owner_name() {
+        return shop_owner_name;
     }
 
-    public int getPro_img() {
-        return pro_img;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPro_img(int pro_img) {
-        this.pro_img = pro_img;
+    public String getCoupon() {
+        return coupon;
     }
 
-    public String getSimple_title() {
-        return simple_title;
+    public String getShop_image() {
+        return shop_image;
     }
 
-    public void setSimple_title(String simple_title) {
-        this.simple_title = simple_title;
+    public String getRating() {
+        return rating;
     }
 
-    public String getSimple_description() {
-        return simple_description;
+    public String getLandmark() {
+        return landmark;
     }
 
-    public void setSimple_description(String simple_description) {
-        this.simple_description = simple_description;
-    }
-
-    public String getSimple_coupon() {
-        return simple_coupon;
-    }
-
-    public void setSimple_coupon(String simple_coupon) {
-        this.simple_coupon = simple_coupon;
-    }
-
-    public String getSimple_quantity() {
-        return simple_quantity;
-    }
-
-    public void setSimple_quantity(String simple_quantity) {
-        this.simple_quantity = simple_quantity;
-    }
-
-    public String getSimple_status() {
-        return simple_status;
-    }
-
-    public void setSimple_status(String simple_status) {
-        this.simple_status = simple_status;
+    public String getDiscount() {
+        return discount;
     }
 }

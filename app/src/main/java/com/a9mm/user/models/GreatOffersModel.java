@@ -4,54 +4,48 @@ public class GreatOffersModel {
 
     public GreatOffersModel() {
     }
-    private int offers_shop_img;
-    private  String offers_shop_name, offers_time, offers_discount, offers_rating;
+    private String shop_name,shop_owner_name,description,coupon,shop_image,rating,landmark,discount;
 
-    public GreatOffersModel(int offers_shop_img, String offers_shop_name, String offers_time, String offers_discount, String offers_rating) {
-        this.offers_shop_img = offers_shop_img;
-        this.offers_shop_name = offers_shop_name;
-        this.offers_time = offers_time;
-        this.offers_discount = offers_discount;
-        this.offers_rating = offers_rating;
+    public GreatOffersModel(String shop_name, String shop_owner_name, String description, String coupon, String shop_image, String rating, String landmark, String discount) {
+        this.shop_name = shop_name;
+        this.shop_owner_name = shop_owner_name;
+        this.description = description;
+        this.coupon = coupon;
+        this.shop_image = shop_image;
+        this.rating = rating;
+        this.landmark = landmark;
+        this.discount = discount;
     }
 
-    public int getOffers_shop_img() {
-        return offers_shop_img;
+    public String getShop_name() {
+        return shop_name;
     }
 
-    public void setOffers_shop_img(int offers_shop_img) {
-        this.offers_shop_img = offers_shop_img;
+    public String getShop_owner_name() {
+        return shop_owner_name;
     }
 
-    public String getOffers_shop_name() {
-        return offers_shop_name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOffers_shop_name(String offers_shop_name) {
-        this.offers_shop_name = offers_shop_name;
+    public String getCoupon() {
+        return coupon;
     }
 
-    public String getOffers_time() {
-        return offers_time;
+    public String getShop_image() {
+        return shop_image;
     }
 
-    public void setOffers_time(String offers_time) {
-        this.offers_time = offers_time;
+    public String getRating() {
+        return rating;
     }
 
-    public String getOffers_discount() {
-        return offers_discount;
+    public String getLandmark() {
+        return landmark;
     }
 
-    public void setOffers_discount(String offers_discount) {
-        this.offers_discount = offers_discount;
-    }
-
-    public String getOffers_rating() {
-        return offers_rating;
-    }
-
-    public void setOffers_rating(String offers_rating) {
-        this.offers_rating = offers_rating;
+    public String getDiscount() {
+        return discount;
     }
 }

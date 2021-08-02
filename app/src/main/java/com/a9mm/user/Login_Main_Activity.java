@@ -80,7 +80,7 @@ public class Login_Main_Activity extends AppCompatActivity {
 
         plateModelList = new ArrayList<>();
 
-        Call<Users> categoryCall = apiInterface.getCategoriesPlate();
+       /* Call<Users> categoryCall = apiInterface.getCategoriesPlate();
         categoryCall.enqueue(new Callback<Users>() {
             @Override
             public void onResponse(Call<Users> call, Response<Users> response) {
@@ -99,14 +99,18 @@ public class Login_Main_Activity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Users> call, Throwable t) {
             }
-        });
-       /* plateModelList.add(new PlateModel(R.drawable.buger_one));
+        });*/
+       plateModelList.add(new PlateModel(R.drawable.buger_one));
         plateModelList.add(new PlateModel(R.drawable.buger_one));
         plateModelList.add(new PlateModel(R.drawable.buger_one));
         plateModelList.add(new PlateModel(R.drawable.buger_one));
         plateModelList.add(new PlateModel(R.drawable.buger_one));
-        plateModelList.add(new PlateModel(R.drawable.buger_one));*/
+        plateModelList.add(new PlateModel(R.drawable.buger_one));
 
+        plateAdapter = new PlateAdapter(Login_Main_Activity.this, plateModelList);
+        recyclerView.setAdapter(plateAdapter);
+        plateAdapter.notifyDataSetChanged();
+        autoScroll();
 
 
       //

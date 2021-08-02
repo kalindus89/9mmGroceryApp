@@ -45,11 +45,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"
+                android:letterSpacing="0.2"
+                android:text="9mm RECOMMENDATIONS"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/simpleRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"
+                android:letterSpacing="0.2"
+                android:text="9mm GREAT OFFERS"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/greatHorizontalRecyclerView"
                 android:layout_width="match_parent"
@@ -62,7 +81,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
                 android:textStyle="bold"
                 android:letterSpacing="0.2"
                 android:text="9mm EXCLUSIVE"/>

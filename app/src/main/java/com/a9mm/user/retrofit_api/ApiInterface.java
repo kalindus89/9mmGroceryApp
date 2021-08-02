@@ -41,4 +41,20 @@ public interface ApiInterface {
     @GET("strip_banner.php")
     Call<Users> getStripBanner();
 
+    @GET("random_shops.php")
+    Call<Users> getRandomShops();
+
+    @GET("great_offers_shops.php")
+    Call<Users> getGreatOfferShops();
+
+    @GET("great_offers_shops_vertical.php")
+    Call<Users> getGreatOfferShopsVertical();
+
+    @GET("new_arrivals_shops.php")
+    Call<Users> get_new_arrivals_Shops();
+
+    @GET("new_arrivals_shops_vertical.php")
+    Call<Users> getNew_Arrivals_Shops_Vertical();
+
+
 }
