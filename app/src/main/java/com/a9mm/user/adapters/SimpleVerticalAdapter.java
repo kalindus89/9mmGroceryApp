@@ -42,7 +42,7 @@ public class SimpleVerticalAdapter extends RecyclerView.Adapter<SimpleVerticalAd
         holder.shop_owner_name.setText(simpleVerticalModel.getShop_owner_name());
         holder.shop_location.setText(simpleVerticalModel.getLandmark());
         holder.shop_discount.setText(simpleVerticalModel.getDiscount()+" - use code "+simpleVerticalModel.getCoupon());
-        holder.shop_description.setText(simpleVerticalModel.getDescription());
+        holder.shop_description.setText(simpleVerticalModel.getDescription()+"..");
         holder.shop_rating.setText(simpleVerticalModel.getRating());
         Glide.with(context).load(simpleVerticalModel.getShop_image()).placeholder(R.drawable.logo_app_grey).into(holder.proImg);
     }
