@@ -23,6 +23,7 @@ import com.a9mm.user.retrofit_api.ApiClient;
 import com.a9mm.user.retrofit_api.ApiInterface;
 import com.a9mm.user.retrofit_api.Users;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,8 @@ public class FragmentOrder extends Fragment {
     private RecyclerView newArriveHorizontalRecyclerView;
     private RecyclerView newArriveVerticalRecyclerView;
 
+    private ShimmerFrameLayout shimmerFrameLayout_cat,shimmerFrameLayout_banner,shimmerFrameLayout_simple,shimmerFrameLayout_greatHorizontal;
+
     public static ApiInterface apiInterface;
 
     public static FragmentOrder newInstance(String param1, String param2) {
@@ -105,6 +108,23 @@ public class FragmentOrder extends Fragment {
     private void init() {
 
         // (1) category list display
+        shimmerFrameLayout_cat = (ShimmerFrameLayout) view.findViewById(R.id.shimmerFrameLayout_cat);
+        shimmerFrameLayout_cat.setVisibility(View.VISIBLE);
+        shimmerFrameLayout_cat.startShimmer();
+
+        shimmerFrameLayout_banner = (ShimmerFrameLayout) view.findViewById(R.id.shimmerFrameLayout_banner);
+        shimmerFrameLayout_banner.setVisibility(View.VISIBLE);
+        shimmerFrameLayout_banner.startShimmer();
+
+        shimmerFrameLayout_simple = (ShimmerFrameLayout) view.findViewById(R.id.shimmerFrameLayout_simple);
+        shimmerFrameLayout_simple.setVisibility(View.VISIBLE);
+        shimmerFrameLayout_simple.startShimmer();
+
+
+        shimmerFrameLayout_greatHorizontal = (ShimmerFrameLayout) view.findViewById(R.id.shimmerFrameLayout_greatHorizontal);
+        shimmerFrameLayout_greatHorizontal.setVisibility(View.VISIBLE);
+        shimmerFrameLayout_greatHorizontal.startShimmer();
+
         getStripBanner = (ImageView) view.findViewById(R.id.getStripBanner);
 
         Call<Users> stripBannerCall = apiInterface.getStripBanner() ; //change here
@@ -123,11 +143,14 @@ public class FragmentOrder extends Fragment {
         });
 
         catRecyclerView = (RecyclerView) view.findViewById(R.id.catRecyclerView);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         catRecyclerView.setLayoutManager(layoutManager);
 
         categoryModelList = new ArrayList<>();
+
+
 
         Call<Users> categoryCall = apiInterface.getCategories() ; //change here
         categoryCall.enqueue(new Callback<Users>() {
@@ -141,6 +164,9 @@ public class FragmentOrder extends Fragment {
                 catAdapter = new CatAdapter(getActivity(), categoryModelList);
                 catRecyclerView.setAdapter(catAdapter);
                 catAdapter.notifyDataSetChanged();
+
+                shimmerFrameLayout_cat.setVisibility(View.GONE);
+                shimmerFrameLayout_cat.stopShimmer();
             }
 
             @Override
@@ -169,6 +195,9 @@ public class FragmentOrder extends Fragment {
                 bannerAdapter = new BannerAdapter(getActivity(),bannerModelList);
                 bannerRecyclerView.setAdapter(bannerAdapter);
                 bannerAdapter.notifyDataSetChanged();
+
+                shimmerFrameLayout_banner.setVisibility(View.GONE);
+                shimmerFrameLayout_banner.stopShimmer();
 
             }
 
@@ -202,6 +231,9 @@ public class FragmentOrder extends Fragment {
                 simpleRecyclerView.setAdapter(simpleVerticalAdapter);
                 simpleVerticalAdapter.notifyDataSetChanged();
 
+                shimmerFrameLayout_simple.setVisibility(View.GONE);
+                shimmerFrameLayout_simple.stopShimmer();
+
             }
 
             @Override
@@ -232,6 +264,9 @@ public class FragmentOrder extends Fragment {
                 greatOffersAdapter = new GreatOffersAdapter(getActivity(),greatOffersModelList);
                 greatHorizontalRecyclerView.setAdapter(greatOffersAdapter);
                 greatOffersAdapter.notifyDataSetChanged();
+
+                shimmerFrameLayout_greatHorizontal.setVisibility(View.GONE);
+                shimmerFrameLayout_greatHorizontal.stopShimmer();
 
             }
 

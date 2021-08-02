@@ -32,11 +32,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/logo_app_pink" />
+                    android:src="@drawable/logo_app_grey" />
             </androidx.cardview.widget.CardView>
+
+            <include
+                layout="@layout/shimmer_effect_cat_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/catRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <include
+                layout="@layout/shimmer_effect_banner_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -54,6 +63,10 @@
                 android:textStyle="bold"
                 android:letterSpacing="0.2"
                 android:text="9mm RECOMMENDATIONS"/>
+            <include
+                layout="@layout/shimmer_effect_simple_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/simpleRecyclerView"
@@ -69,6 +82,11 @@
                 android:textStyle="bold"
                 android:letterSpacing="0.2"
                 android:text="9mm GREAT OFFERS"/>
+            <include
+                layout="@layout/shimmer_effect_horizontal_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/greatHorizontalRecyclerView"
                 android:layout_width="match_parent"
