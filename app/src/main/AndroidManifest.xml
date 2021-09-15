@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".HomeMainActivity"></activity>
         <activity android:name=".signin_singup_phone.PhoneRegisterActivity" />
         <activity android:name=".signin_singup_phone.PhoneLoginActivity" />
